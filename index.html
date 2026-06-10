@@ -1,58 +1,212 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>margioperez.com</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Margio Pérez | Infraestructura TI</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #0f172a;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-        }
+<style>
 
-        .container {
-            max-width: 600px;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:#050816;
+    color:white;
+    overflow:hidden;
+}
 
-        p {
-            font-size: 1.2rem;
-            color: #cbd5e1;
-        }
+canvas{
+    position:absolute;
+    inset:0;
+}
 
-        .badge {
-            display: inline-block;
-            background: #2563eb;
-            padding: 10px 20px;
-            border-radius: 30px;
-            margin-bottom: 20px;
-        }
-    </style>
+.container{
+    position:relative;
+    z-index:10;
+    height:100vh;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+    padding:20px;
+}
+
+h1{
+    font-size:4rem;
+    margin-bottom:15px;
+}
+
+.highlight{
+    color:#00d4ff;
+}
+
+p{
+    max-width:700px;
+    font-size:1.2rem;
+    color:#b8c5d0;
+    line-height:1.7;
+}
+
+.badge{
+    border:1px solid #00d4ff;
+    padding:10px 20px;
+    border-radius:30px;
+    margin-bottom:25px;
+    color:#00d4ff;
+}
+
+.skills{
+    margin-top:30px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:12px;
+}
+
+.skill{
+    background:#111827;
+    border:1px solid #1f2937;
+    padding:10px 18px;
+    border-radius:25px;
+}
+
+.btn{
+    margin-top:35px;
+    text-decoration:none;
+    color:white;
+    background:#00d4ff;
+    padding:15px 30px;
+    border-radius:30px;
+    font-weight:bold;
+}
+
+.footer{
+    margin-top:25px;
+    color:#8b98a5;
+}
+
+</style>
 </head>
+
 <body>
 
-<div class="container">
-    <div class="badge">🚧 En construcción</div>
+<canvas id="network"></canvas>
 
-    <h1>MargioPerez.com</h1>
+<div class="container">
+
+    <div class="badge">
+        🚧 Portafolio en Construcción
+    </div>
+
+    <h1>
+        Margio <span class="highlight">Pérez</span>
+    </h1>
 
     <p>
-        Estamos trabajando en algo increíble.
-        Pronto encontrarás proyectos, servicios y contenido tecnológico.
+        Ingeniero en Sistemas especializado en Infraestructura TI,
+        Redes Empresariales, Virtualización, Linux y Automatización.
+        Actualmente desarrollando nuevos proyectos y laboratorios para
+        mi portafolio profesional.
     </p>
+
+    <div class="skills">
+        <div class="skill">CCNA</div>
+        <div class="skill">Linux</div>
+        <div class="skill">Proxmox</div>
+        <div class="skill">Docker</div>
+        <div class="skill">Networking</div>
+        <div class="skill">Python</div>
+        <div class="skill">Cybersecurity</div>
+    </div>
+
+    <a class="btn" href="#">
+        Próximamente
+    </a>
+
+    <div class="footer">
+        margioperez.com
+    </div>
+
 </div>
 
+<script>
+
+const canvas = document.getElementById('network');
+const ctx = canvas.getContext('2d');
+
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+const particles=[];
+
+for(let i=0;i<80;i++){
+    particles.push({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        dx:(Math.random()-0.5)*0.8,
+        dy:(Math.random()-0.5)*0.8
+    });
+}
+
+function animate(){
+
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    particles.forEach(p=>{
+
+        p.x+=p.dx;
+        p.y+=p.dy;
+
+        if(p.x<0||p.x>canvas.width) p.dx*=-1;
+        if(p.y<0||p.y>canvas.height) p.dy*=-1;
+
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,2,0,Math.PI*2);
+        ctx.fillStyle='#00d4ff';
+        ctx.fill();
+
+        particles.forEach(q=>{
+
+            const dist=Math.hypot(p.x-q.x,p.y-q.y);
+
+            if(dist<120){
+
+                ctx.beginPath();
+                ctx.moveTo(p.x,p.y);
+                ctx.lineTo(q.x,q.y);
+
+                ctx.strokeStyle=
+                `rgba(0,212,255,${1-dist/120})`;
+
+                ctx.stroke();
+
+            }
+
+        });
+
+    });
+
+    requestAnimationFrame(animate);
+
+}
+
+animate();
+
+window.addEventListener('resize',()=>{
+    canvas.width=innerWidth;
+    canvas.height=innerHeight;
+});
+
+</script>
+
 </body>
+</html>
 </html>

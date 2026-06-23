@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Altura Café Export — Café de altura de Jinotega, Nicaragua</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --espresso: #1c140f;
+    --espresso-2: #241a13;
+    --parchment: #ede3d0;
+    --parchment-dim: #c9bfa9;
+    --clay: #b5562a;
+    --sage: #7a8b5e;
+    --gold: #c9a227;
+    --line: rgba(237,227,208,0.14);
+    --radius: 4px;
+    --maxw: 1180px;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--espresso);
+    color:var(--parchment);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  img,svg{ display:block; max-width:100%; }
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.04em;
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    line-height:1.08;
+    letter-spacing:-0.01em;
+  }
+
+  :focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:3px;
+  }
+
+  /* ---------- topographic divider signature ---------- */
+  .ridge{
+    width:100%;
+    height:46px;
+    display:block;
+  }
+  .ridge path{
+    fill:none;
+    stroke:var(--gold);
+    stroke-width:1;
+    opacity:0.55;
+  }
+  .ridge path.b{ opacity:0.25; stroke:var(--sage); }
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(28,20,15,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px;
+    max-width:var(--maxw); margin:0 auto;
+  }
+  .logo{
+    font-family:'Fraunces', serif;
+    font-weight:700; font-size:20px;
+    letter-spacing:0.01em;
+  }
+  .logo span{ color:var(--gold); }
+  .navlinks{ display:flex; gap:32px; align-items:center; }
+  .navlinks a{
+    font-size:14px; color:var(--parchment-dim);
+    transition:color .2s ease;
+  }
+  .navlinks a:hover{ color:var(--parchment); }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:11px 20px;
+    border-radius:var(--radius);
+    font-size:14px; font-weight:600;
+    border:1px solid var(--gold);
+    color:var(--espresso);
+    background:var(--gold);
+    cursor:pointer;
+    transition:transform .15s ease, background .2s ease;
+  }
+  .btn:hover{ background:#dab43c; }
+  .btn:active{ transform:translateY(1px); }
+  .btn.ghost{
+    background:transparent; color:var(--parchment); border-color:var(--line);
+  }
+  .btn.ghost:hover{ border-color:var(--parchment-dim); }
+  .navcta{ display:none; }
+  @media (min-width:760px){ .navcta{ display:inline-flex; } }
+
+  .menu-toggle{ display:none; background:none; border:none; color:var(--parchment); font-size:22px; cursor:pointer; }
+  @media (max-width:759px){
+    .navlinks{ display:none; }
+    .menu-toggle{ display:block; }
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    padding:96px 0 70px;
+  }
+  .hero-mountains{
+    position:absolute; inset:0;
+    z-index:0;
+    opacity:0.5;
+  }
+  .hero-inner{
+    position:relative; z-index:2;
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:48px;
+    align-items:end;
+  }
+  @media (max-width:880px){ .hero-inner{ grid-template-columns:1fr; } }
+
+  .hero h1{
+    font-size:clamp(38px, 5.4vw, 68px);
+    max-width:14ch;
+    margin-bottom:22px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--clay);
+  }
+  .hero p.lede{
+    font-size:18px;
+    color:var(--parchment-dim);
+    max-width:46ch;
+    margin-bottom:32px;
+  }
+  .hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; }
+
+  .stamp{
+    align-self:end;
+    border:1px dashed var(--parchment-dim);
+    border-radius:var(--radius);
+    padding:20px 22px;
+    background:rgba(237,227,208,0.04);
+  }
+  .stamp .eyebrow{ margin-bottom:10px; }
+  .stamp-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:14px 18px;
+  }
+  .stamp-grid div{ font-size:12px; }
+  .stamp-grid b{
+    display:block; font-family:'IBM Plex Mono',monospace;
+    font-size:14px; color:var(--parchment); margin-top:2px;
+  }
+  .stamp-grid span{ color:var(--parchment-dim); }
+
+  /* ---------- manifest strip ---------- */
+  .manifest{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background:var(--espresso-2);
+  }
+  .manifest .wrap{
+    display:flex; flex-wrap:wrap; gap:0;
+    padding:0;
+  }
+  .manifest-item{
+    flex:1 1 160px;
+    padding:22px 28px;
+    border-right:1px solid var(--line);
+  }
+  .manifest-item:last-child{ border-right:none; }
+  .manifest-item .eyebrow{ font-size:10.5px; margin-bottom:6px; }
+  .manifest-item .val{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:14px;
+  }
+
+  /* ---------- section base ---------- */
+  section{ padding:88px 0; position:relative; }
+  .section-head{ max-width:640px; margin-bottom:52px; }
+  .section-head .eyebrow{ margin-bottom:14px; }
+  .section-head h2{ font-size:clamp(28px,3.4vw,40px); margin-bottom:14px; }
+  .section-head p{ color:var(--parchment-dim); font-size:16px; }
+
+  /* ---------- origin ---------- */
+  .origin{
+    display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;
+  }
+  @media (max-width:880px){ .origin{ grid-template-columns:1fr; } }
+  .origin-copy p{ color:var(--parchment-dim); margin-bottom:18px; }
+  .origin-copy p:last-child{ margin-bottom:0; }
+  .origin-art{
+    aspect-ratio:1/1;
+    border-radius:var(--radius);
+    background:linear-gradient(180deg, #2a1f16 0%, #1c140f 70%);
+    border:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+  }
+  .origin-art svg{ position:absolute; inset:0; width:100%; height:100%; }
+
+  /* ---------- lots ---------- */
+  .lots-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  @media (max-width:880px){ .lots-grid{ grid-template-columns:1fr; } }
+  .lot-card{
+    background:var(--espresso);
+    padding:30px 28px;
+    transition:background .25s ease;
+  }
+  .lot-card:hover{ background:var(--espresso-2); }
+  .lot-card .lotcode{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px; color:var(--gold); margin-bottom:14px;
+  }
+  .lot-card h3{ font-size:22px; margin-bottom:8px; font-weight:500; }
+  .lot-card .notes{ color:var(--parchment-dim); font-size:14px; margin-bottom:20px; }
+  .lot-meta{ display:flex; flex-wrap:wrap; gap:8px; }
+  .tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    border:1px solid var(--line);
+    border-radius:2px;
+    padding:4px 8px;
+    color:var(--parchment-dim);
+  }
+
+  /* ---------- certifications ---------- */
+  .certs{
+    display:flex; flex-wrap:wrap; gap:40px;
+    justify-content:space-between;
+  }
+  .cert{
+    flex:1 1 200px;
+    display:flex; align-items:center; gap:14px;
+  }
+  .cert svg{ width:40px; height:40px; flex-shrink:0; }
+  .cert .name{ font-weight:600; font-size:14.5px; margin-bottom:2px; }
+  .cert .desc{ font-size:12.5px; color:var(--parchment-dim); }
+
+  /* ---------- logistics ---------- */
+  .logi{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line);
+  }
+  @media (max-width:880px){ .logi{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:520px){ .logi{ grid-template-columns:1fr; } }
+  .logi-item{ background:var(--espresso); padding:26px 24px; }
+  .logi-item .eyebrow{ font-size:10.5px; margin-bottom:10px; }
+  .logi-item .big{ font-family:'Fraunces',serif; font-size:26px; margin-bottom:6px; }
+  .logi-item .small{ font-size:13px; color:var(--parchment-dim); }
+
+  /* ---------- contact ---------- */
+  .contact-grid{
+    display:grid; grid-template-columns:0.9fr 1.1fr; gap:64px;
+  }
+  @media (max-width:880px){ .contact-grid{ grid-template-columns:1fr; } }
+  .contact-copy p{ color:var(--parchment-dim); margin-top:14px; max-width:42ch; }
+  .contact-info{ margin-top:32px; display:flex; flex-direction:column; gap:10px; }
+  .contact-info a{ font-family:'IBM Plex Mono',monospace; font-size:14px; color:var(--parchment); }
+  .contact-info a:hover{ color:var(--gold); }
+
+  form{ display:grid; gap:18px; }
+  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  @media (max-width:520px){ .form-row{ grid-template-columns:1fr; } }
+  label{ font-size:12.5px; color:var(--parchment-dim); display:block; margin-bottom:7px; }
+  input, textarea, select{
+    width:100%;
+    background:var(--espresso-2);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:12px 14px;
+    color:var(--parchment);
+    font-family:'Inter',sans-serif;
+    font-size:14.5px;
+  }
+  input:focus, textarea:focus, select:focus{
+    border-color:var(--gold);
+  }
+  textarea{ resize:vertical; min-height:100px; }
+  .submit-row{ display:flex; align-items:center; gap:16px; margin-top:4px; }
+  .form-note{ font-size:12px; color:var(--parchment-dim); }
+
+  /* ---------- footer ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding:48px 0 36px;
+  }
+  .foot-inner{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px;
+  }
+  .foot-left .logo{ margin-bottom:10px; }
+  .foot-left p{ font-size:13px; color:var(--parchment-dim); max-width:36ch; }
+  .foot-right{ display:flex; gap:36px; flex-wrap:wrap; }
+  .foot-col h4{
+    font-family:'IBM Plex Mono',monospace; font-size:11px;
+    text-transform:uppercase; letter-spacing:0.12em;
+    color:var(--parchment-dim); margin-bottom:10px;
+  }
+  .foot-col a{ display:block; font-size:13.5px; margin-bottom:6px; color:var(--parchment); }
+  .foot-col a:hover{ color:var(--gold); }
+  .foot-bottom{
+    margin-top:40px; padding-top:24px; border-top:1px solid var(--line);
+    font-size:12px; color:var(--parchment-dim);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .reveal{ opacity:1; transform:none; transition:none; }
+    .btn{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a class="logo" href="#top">ALT<span>URA</span></a>
+    <div class="navlinks">
+      <a href="#origen">Origen</a>
+      <a href="#lotes">Lotes</a>
+      <a href="#certificaciones">Certificaciones</a>
+      <a href="#logistica">Logística</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+    <a href="#contacto" class="btn navcta">Solicitar cotización</a>
+    <button class="menu-toggle" aria-label="Abrir menú">☰</button>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-mountains" aria-hidden="true">
+      <svg viewBox="0 0 1200 500" preserveAspectRatio="none" width="100%" height="100%">
+        <polyline points="0,420 120,300 220,360 340,200 460,310 600,150 740,290 860,230 980,330 1100,260 1200,320 1200,500 0,500"
+          fill="#241a13" />
+        <polyline points="0,460 150,380 280,420 420,300 560,400 700,280 840,380 980,320 1120,400 1200,360 1200,500 0,500"
+          fill="#1c140f" />
+        <polyline points="0,420 120,300 220,360 340,200 460,310 600,150 740,290 860,230 980,330 1100,260 1200,320"
+          fill="none" stroke="#c9a227" stroke-width="1" opacity="0.4" />
+      </svg>
+    </div>
+
+    <div class="wrap hero-inner">
+      <div>
+        <p class="eyebrow">Jinotega, Nicaragua — exportación directa</p>
+        <h1>Café cultivado en <em>altura</em>, trazado hasta el puerto de salida.</h1>
+        <p class="lede">Lotes de especialidad de las fincas altas de Jinotega, con documentación de origen, ficha de catación y logística de exportación lista para tu importador o tostador.</p>
+        <div class="hero-ctas">
+          <a href="#contacto" class="btn">Solicitar cotización</a>
+          <a href="#lotes" class="btn ghost">Ver catálogo de lotes</a>
+        </div>
+      </div>
+
+      <div class="stamp">
+        <p class="eyebrow">Manifiesto de origen</p>
+        <div class="stamp-grid">
+          <div><span>Altitud</span><b>1,200–1,600 msnm</b></div>
+          <div><span>Variedades</span><b>Caturra · Pacamara</b></div>
+          <div><span>Proceso</span><b>Lavado · Honey</b></div>
+          <div><span>Cosecha</span><b>Nov — Feb</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFEST STRIP -->
+  <div class="manifest">
+    <div class="wrap">
+      <div class="manifest-item"><p class="eyebrow">Origen</p><p class="val">Jinotega, NI</p></div>
+      <div class="manifest-item"><p class="eyebrow">Capacidad anual</p><p class="val">~ 480,000 kg</p></div>
+      <div class="manifest-item"><p class="eyebrow">Incoterms</p><p class="val">FOB · CIF</p></div>
+      <div class="manifest-item"><p class="eyebrow">Empaque</p><p class="val">GrainPro / Yute</p></div>
+      <div class="manifest-item"><p class="eyebrow">Puerto</p><p class="val">Corinto</p></div>
+    </div>
+  </div>
+
+  <svg class="ridge" viewBox="0 0 1200 46" preserveAspectRatio="none"><path class="b" d="M0,30 L100,12 200,34 300,8 400,28 500,4 600,24 700,14 800,32 900,10 1000,26 1100,16 1200,30"/><path d="M0,38 L100,20 200,40 300,18 400,36 500,14 600,32 700,22 800,38 900,18 1000,34 1100,24 1200,38"/></svg>
+
+  <!-- ORIGIN -->
+  <section id="origen">
+    <div class="wrap origin reveal">
+      <div class="origin-copy">
+        <p class="eyebrow">Origen</p>
+        <h2 style="margin:14px 0 22px; font-size:clamp(26px,3vw,36px);">Tres fincas, un mismo gradiente de altura</h2>
+        <p>Las parcelas que trabajamos están entre 1,200 y 1,600 metros sobre el nivel del mar, en la cordillera al norte de Jinotega. El suelo volcánico y la sombra de guabo retienen la humedad durante la época seca y desaceleran la maduración de la cereza.</p>
+        <p>Cada lote se separa por finca, altura y fecha de corte. No mezclamos cosechas ni microlotes: lo que se factura es lo que se catará en destino.</p>
+        <p>Trabajamos directamente con 14 familias productoras bajo contrato de compra anticipada, sin intermediarios entre la finca y el puerto.</p>
+      </div>
+      <div class="origin-art">
+        <svg viewBox="0 0 400 400">
+          <rect width="400" height="400" fill="#1c140f"/>
+          <polyline points="0,300 60,220 130,260 200,140 260,210 330,90 400,180 400,400 0,400" fill="#2a1f16"/>
+          <polyline points="0,340 80,280 160,320 230,240 300,300 400,250 400,400 0,400" fill="#241a13"/>
+          <g stroke="#7a8b5e" stroke-width="1.4" opacity="0.55" fill="none">
+            <path d="M120,260 q-6,-18 0,-30 q6,12 0,30"/>
+            <path d="M150,240 q-6,-18 0,-30 q6,12 0,30"/>
+            <path d="M180,250 q-6,-18 0,-30 q6,12 0,30"/>
+            <path d="M210,235 q-6,-18 0,-30 q6,12 0,30"/>
+            <path d="M240,255 q-6,-18 0,-30 q6,12 0,30"/>
+          </g>
+          <circle cx="135" cy="232" r="3" fill="#b5562a"/>
+          <circle cx="165" cy="214" r="3" fill="#c9a227"/>
+          <circle cx="195" cy="224" r="3" fill="#b5562a"/>
+          <circle cx="225" cy="208" r="3" fill="#c9a227"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <svg class="ridge" viewBox="0 0 1200 46" preserveAspectRatio="none"><path d="M0,20 L100,36 200,14 300,32 400,10 500,30 600,16 700,34 800,12 900,28 1000,18 1100,32 1200,16"/></svg>
+
+  <!-- LOTS -->
+  <section id="lotes">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Catálogo</p>
+        <h2>Lotes disponibles, ciclo 2026</h2>
+        <p>Volúmenes y fichas de catación actualizadas por cosecha. Muestras de 350g disponibles bajo solicitud.</p>
+      </div>
+      <div class="lots-grid reveal">
+        <div class="lot-card">
+          <p class="lotcode mono">LOTE — JN-0426-A</p>
+          <h3>La Esperanza</h3>
+          <p class="notes">Panela, ciruela, final a almendra tostada.</p>
+          <div class="lot-meta">
+            <span class="tag">1,450 msnm</span>
+            <span class="tag">Caturra</span>
+            <span class="tag">Lavado</span>
+            <span class="tag">86.5 pts</span>
+          </div>
+        </div>
+        <div class="lot-card">
+          <p class="lotcode mono">LOTE — JN-0426-B</p>
+          <h3>El Roble</h3>
+          <p class="notes">Mandarina, miel, cuerpo cremoso.</p>
+          <div class="lot-meta">
+            <span class="tag">1,300 msnm</span>
+            <span class="tag">Catuaí</span>
+            <span class="tag">Honey</span>
+            <span class="tag">85 pts</span>
+          </div>
+        </div>
+        <div class="lot-card">
+          <p class="lotcode mono">LOTE — JN-0426-C</p>
+          <h3>Mirador Alto</h3>
+          <p class="notes">Jazmín, mango, acidez cítrica viva.</p>
+          <div class="lot-meta">
+            <span class="tag">1,600 msnm</span>
+            <span class="tag">Pacamara</span>
+            <span class="tag">Natural</span>
+            <span class="tag">88 pts</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <svg class="ridge" viewBox="0 0 1200 46" preserveAspectRatio="none"><path class="b" d="M0,28 L100,10 200,30 300,14 400,34 500,12 600,30 700,18 800,32 900,14 1000,28 1100,16 1200,30"/></svg>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certificaciones">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Certificaciones</p>
+        <h2>Trazabilidad verificable de finca a contenedor</h2>
+      </div>
+      <div class="certs reveal">
+        <div class="cert">
+          <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="none" stroke="#7a8b5e" stroke-width="1.5"/><path d="M12,21 l5,5 11,-13" fill="none" stroke="#7a8b5e" stroke-width="2"/></svg>
+          <div><p class="name">Orgánico certificado</p><p class="desc">Sin agroquímicos de síntesis, auditoría anual.</p></div>
+        </div>
+        <div class="cert">
+          <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="none" stroke="#c9a227" stroke-width="1.5"/><path d="M12,21 l5,5 11,-13" fill="none" stroke="#c9a227" stroke-width="2"/></svg>
+          <div><p class="name">Comercio justo</p><p class="desc">Precio mínimo garantizado al productor.</p></div>
+        </div>
+        <div class="cert">
+          <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="none" stroke="#b5562a" stroke-width="1.5"/><path d="M12,21 l5,5 11,-13" fill="none" stroke="#b5562a" stroke-width="2"/></svg>
+          <div><p class="name">Rainforest Alliance</p><p class="desc">Sombra nativa y manejo de cuencas.</p></div>
+        </div>
+        <div class="cert">
+          <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="none" stroke="#ede3d0" stroke-width="1.5"/><path d="M12,21 l5,5 11,-13" fill="none" stroke="#ede3d0" stroke-width="2"/></svg>
+          <div><p class="name">Trazabilidad por lote</p><p class="desc">Código de finca y fecha de corte por saco.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <svg class="ridge" viewBox="0 0 1200 46" preserveAspectRatio="none"><path d="M0,18 L100,34 200,12 300,30 400,16 500,32 600,14 700,28 800,18 900,34 1000,16 1100,30 1200,20"/></svg>
+
+  <!-- LOGISTICS -->
+  <section id="logistica">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Logística de exportación</p>
+        <h2>De la finca al contenedor, sin fricción para el comprador</h2>
+      </div>
+      <div class="logi reveal">
+        <div class="logi-item">
+          <p class="eyebrow">Puerto de salida</p>
+          <p class="big">Corinto</p>
+          <p class="small">Pacífico de Nicaragua, conexión a rutas transpacíficas y al Caribe vía Panamá.</p>
+        </div>
+        <div class="logi-item">
+          <p class="eyebrow">Capacidad por contenedor</p>
+          <p class="big">~19,200 kg</p>
+          <p class="small">Sacos de 69 kg en pallets, o bolsas GrainPro a granel.</p>
+        </div>
+        <div class="logi-item">
+          <p class="eyebrow">Plazo desde orden</p>
+          <p class="big">25–35 días</p>
+          <p class="small">Incluye trilla, selección y documentación de exportación.</p>
+        </div>
+        <div class="logi-item">
+          <p class="eyebrow">Incoterms</p>
+          <p class="big">FOB / CIF</p>
+          <p class="small">Pago 30% anticipo, 70% contra B/L.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <svg class="ridge" viewBox="0 0 1200 46" preserveAspectRatio="none"><path class="b" d="M0,24 L100,8 200,28 300,12 400,32 500,16 600,30 700,14 800,28 900,18 1000,32 1100,12 1200,26"/></svg>
+
+  <!-- CONTACT -->
+  <section id="contacto">
+    <div class="wrap contact-grid">
+      <div class="contact-copy reveal">
+        <p class="eyebrow">Contacto</p>
+        <h2 style="margin:14px 0 0; font-size:clamp(26px,3vw,36px);">Solicita muestra o cotización de lote</h2>
+        <p>Respondemos en menos de 48 horas hábiles con ficha de catación, precio FOB y disponibilidad de volumen.</p>
+        <div class="contact-info">
+          <a href="mailto:exportaciones@alturacafe.com">exportaciones@alturacafe.com</a>
+          <a href="tel:+50582345678">+505 8234 5678</a>
+          <a href="#">Jinotega, Nicaragua</a>
+        </div>
+      </div>
+
+      <form class="reveal" onsubmit="event.preventDefault(); this.querySelector('.form-note').textContent='Solicitud enviada — te contactaremos pronto.';">
+        <div class="form-row">
+          <div>
+            <label for="empresa">Empresa</label>
+            <input id="empresa" type="text" placeholder="Nombre de la tostaduría / importadora" required>
+          </div>
+          <div>
+            <label for="pais">País</label>
+            <input id="pais" type="text" placeholder="País de destino" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label for="volumen">Volumen estimado (kg/año)</label>
+            <input id="volumen" type="text" placeholder="Ej. 5,000 kg">
+          </div>
+          <div>
+            <label for="email">Correo</label>
+            <input id="email" type="email" placeholder="tu@empresa.com" required>
+          </div>
+        </div>
+        <div>
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" placeholder="Lote de interés, proceso, fecha de entrega deseada…"></textarea>
+        </div>
+        <div class="submit-row">
+          <button type="submit" class="btn">Enviar solicitud</button>
+          <span class="form-note">Respuesta en 48h hábiles.</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div class="foot-left">
+        <p class="logo">ALT<span style="color:var(--gold)">URA</span></p>
+        <p>Exportadora de café de especialidad de Jinotega, Nicaragua. Trato directo finca–comprador desde 2014.</p>
+      </div>
+      <div class="foot-right">
+        <div class="foot-col">
+          <h4>Compañía</h4>
+          <a href="#origen">Origen</a>
+          <a href="#lotes">Lotes</a>
+          <a href="#certificaciones">Certificaciones</a>
+        </div>
+        <div class="foot-col">
+          <h4>Exportación</h4>
+          <a href="#logistica">Logística</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Altura Café Export · Jinotega, Nicaragua</span>
+      <span class="mono">RUC 000-000000-0000A</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
